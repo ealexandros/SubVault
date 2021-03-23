@@ -15,7 +15,7 @@
                             <td class="w-1/2 pb-3 pt-3 font-bold">${file[0]}</td>
                             <td class="w-1/4 pb-3 pt-3 text-center">${file[1]}b</td>
                             <td class="w-1/4 pb-3 pt-3 text-center">
-                            <button class="rounded-md p-2 font-bold text-xs bg-white" style="color: red">Unencrypt</button>
+                            <button class="rounded-md p-2 text-xs bg-white" style="color: red">Decrypt</button>
                             </td>
                         </tr>`
     });

@@ -2,15 +2,23 @@ import glob
 import os
 import json
 import base64
+import random
 
 import errno
 import pickle
 
 import shutil
 
+import hashlib
+from Crypto.Cipher import AES
+
 class FolderEditor:
     def __init__(self, name="vault"):
-        self.NAME = name 
+        self.NAME = name
+
+        self.IV_SIZE = 16
+        self.KEY_SIZE = 32
+        self.salt = b''
 
     def encrypt(self, password):
         if(not os.path.isdir(self.NAME)):
@@ -25,23 +33,35 @@ class FolderEditor:
         structure_json = json.dumps(structure)
         encode_structure = base64.b64encode(structure_json.encode("utf-8"))
 
-        with open(f"{self.NAME}.vl", 'wb') as fil:
-            pickle.dump(encode_structure, fil)
+        derived = hashlib.pbkdf2_hmac('sha256', bytes(password, encoding='utf8'), self.salt, 100000, dklen=self.IV_SIZE + self.KEY_SIZE)
+        iv = derived[0:self.IV_SIZE]
+        key = derived[self.IV_SIZE:]
+        encrypted_structure = AES.new(key, AES.MODE_CFB, iv).encrypt(encode_structure)
 
-    def decrypt(self):
+        with open(f"{self.NAME}.vl", 'wb') as fil:
+            pickle.dump(encrypted_structure, fil)
+
+    def decrypt(self, password):
         with open(f"{self.NAME}.vl", 'rb') as fil:
             data = pickle.load(fil)
 
-        decoded_structure = base64.b64decode(data)
+        derived = hashlib.pbkdf2_hmac('sha256', bytes(password, encoding='utf8'), self.salt, 100000, dklen=self.IV_SIZE + self.KEY_SIZE)
+        iv = derived[0:self.IV_SIZE]
+        key = derived[self.IV_SIZE:]
+        decrypted_structure = AES.new(key, AES.MODE_CFB, iv).decrypt(data)
+
+        decoded_structure = base64.b64decode(decrypted_structure)
         structure = json.loads(decoded_structure)
+
+        if(not isinstance(structure, list)):
+            return False
 
         for path, content in structure:
             self.check_for_sub_directory(path)
             with open(path, 'wb') as fil:
                 fil.write(str.encode(content))
 
-    def del_folder(self):
-        shutil.rmtree(self.NAME)
+        return True
 
     def check_for_sub_directory(self, filename):
         if(not os.path.exists(os.path.dirname(filename))):
@@ -49,4 +69,4 @@ class FolderEditor:
                 os.makedirs(os.path.dirname(filename))
             except OSError as exc:
                 if(exc.errno != errno.EEXIST):
-                    raise Exception('File already exists.')
+                    return True
