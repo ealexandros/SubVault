@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="61" height="61" viewBox="0 0 61 61">
+  <defs>
+    <filter id="Rectangle_22" x="12" y="17.439" width="37.785" height="13.731" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_18" data-name="Group 18" transform="translate(-523 -100)">
+    <g id="Group_10" data-name="Group 10" transform="translate(320 -107)">
+      <rect id="Rectangle_20" data-name="Rectangle 20" width="61" height="61" rx="7" transform="translate(203 207)" fill="#011627"/>
+      <g id="Group_9" data-name="Group 9">
+        <g id="Group_6" data-name="Group 6" transform="translate(-1)">
+          <g id="Group_3" data-name="Group 3" transform="translate(3.892 10.76)">
+            <rect id="Rectangle_21" data-name="Rectangle 21" width="28" height="18" transform="translate(217 223.357)" fill="#f71735"/>
+            <g transform="matrix(1, 0, 0, 1, 200.11, 196.24)" filter="url(#Rectangle_22)">
+              <path id="Rectangle_22-2" data-name="Rectangle 22" d="M2,0H29.785a2,2,0,0,1,2,2V7.731a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V2A2,2,0,0,1,2,0Z" transform="translate(15 19.44)" fill="#fdfffc"/>
+            </g>
+          </g>
+        </g>
+        <path id="Intersection_1" data-name="Intersection 1" d="M512-13v-3.268A2,2,0,0,1,511-18a2,2,0,0,1,2-2,2,2,0,0,1,2,2,2,2,0,0,1-1,1.733V-13Z" transform="translate(-279 260)" fill="#011627"/>
+      </g>
+    </g>
+  </g>
+</svg>
