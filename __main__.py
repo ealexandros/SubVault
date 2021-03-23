@@ -1,6 +1,6 @@
 import eel
 
-from model.FolderEditor import FolderEditor
+from presenter.FolderEditorPresenter import *
 
 eel.init('view')
 eel.start('main.html', size=(600, 350))

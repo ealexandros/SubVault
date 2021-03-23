@@ -12,7 +12,7 @@ class FolderEditor:
     def __init__(self, name="vault"):
         self.NAME = name 
 
-    def encrypt(self):
+    def encrypt(self, password):
         if(not os.path.isdir(self.NAME)):
             raise Exception(f'There is no folder with the name, {self.NAME}')
 
