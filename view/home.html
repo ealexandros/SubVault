@@ -5,11 +5,12 @@
     <link rel="icon" href="assets/logo.svg">
     <title>SubVault</title>
 
-    <link rel="stylesheet" href="css/tailwind.css">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
     <script type="text/javascript" src="/eel.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/created.js"></script>
+    <script src="js/presenter.js"></script>
   </head>
   <body>
     <div class="m-auto w-4/5 mt-10 pt-6">
@@ -18,27 +19,34 @@
       </h1>
 
       <div class="mt-5">
-        <div class="text-sm text-red-500 font-bold ml-1 mb-1 hidden">Could not find the folder with that name.</div>
-        <input placeholder="Vault.." type="text" class="text-black p-3 pl-3 rounded-lg w-4/5 outline-none">
-        <button class="sm:ml-3 w-24 pr-4 p-3 rounded-lg font-bold outline-none hover:bg-red-300" style="background-color: red">Encrypt.</button>
+        <div class="text-sm text-red-500 font-bold ml-1 mb-1 hidden" id="folder_name_error">Could not find the folder with that name.</div>
+        <input placeholder="Vault.." id="vault_name" type="text" class="text-black p-3 pl-3 rounded-lg w-4/5 outline-none">
+        <button class="sm:ml-3 w-24 pr-4 p-3 rounded-lg font-bold outline-none hover:bg-red-300"
+          onclick="revealEncryptionPopUp()" style="background-color: red">Encrypt.</button>
       </div>
 
-      <div class="mt-5 hidden">
-        <h3 class="text-2xl font-bold mb-2" id="password_folder"></h3>
-        <div class="text-sm text-red-500 font-bold ml-1 mb-1 hidden">The password isn't correct.</div>
-        <input placeholder="Password" type="password" class="text-black p-3 pl-3 rounded-lg w-2/5 outline-none">
-        <button class="sm:ml-3 w-24 pr-4 p-3 rounded-lg font-bold outline-none hover:bg-red-300" style="background-color: red">Decrypt.</button>
+      <div class="mt-5 hidden" id="decrypt_vault_pass">
+        <h3 class="text-2xl font-bold mb-2" id="decrypt_password_vault"></h3>
+        <div class="text-sm text-red-500 font-bold ml-1 mb-1 hidden" id="decrypt_password_error">The password isn't correct.</div>
+        <input placeholder="Password" type="password" class="text-black p-3 pl-3 rounded-lg w-2/5 outline-none" id="decrypt_password">
+        <button class="sm:ml-3 w-24 pr-4 p-3 rounded-lg font-bold outline-none"
+          onclick="decryptVaultFile()" style="background-color: red">Decrypt.</button>
+        <button class="sm:ml-1 w-12 p-3 rounded-lg font-extrabold outline-none text-red-500"
+          onclick="closeDecryptFolderPopUp()" style="background-color: white">X</button>
       </div>
 
-      <div class="mt-5 hidden">
-        <h3 class="text-2xl font-bold mb-2" id="password_folder"></h3>
-        <div class="text-sm text-red-500 font-bold ml-1 mb-1 hidden">The password isn't correct.</div>
-        <input placeholder="Password" type="password" class="text-black p-3 pl-3 rounded-lg w-1/3 outline-none">
-        <input placeholder="Verify Password" type="password" class="text-black p-3 pl-3 ml-2 rounded-lg w-1/3 outline-none">
-        <button class="sm:ml-3 w-24 pr-4 p-3 rounded-lg font-bold outline-none hover:bg-red-300" style="background-color: red">Decrypt.</button>
+      <div class="mt-5 hidden" id="encypt_folder_pass">
+        <h3 class="text-2xl font-bold mb-2" id="encrypt_password_folder"></h3>
+        <div class="text-sm text-red-500 font-bold ml-1 mb-1 hidden" id="encrypt_password_error">The password isn't correct.</div>
+        <input placeholder="Password" type="password" class="text-black p-3 pl-3 rounded-lg w-1/3 outline-none" id="encrypt_password">
+        <input placeholder="Verify Password" type="password" class="text-black p-3 pl-3 ml-2 rounded-lg w-1/3 outline-none" id="encrypt_password_verify">
+        <button class="sm:ml-1 w-24 pr-4 p-3 rounded-lg font-bold outline-none"
+          onclick="encryptVaultFolder()" style="background-color: red">Encrypt.</button>
+        <button class="sm:ml-1 w-12 p-3 rounded-lg font-extrabold outline-none text-red-500"
+          onclick="closeEcryptFolderPopUp()" style="background-color: white">X</button>
       </div>
 
-      <table class="table-auto mt-8 w-full" id="vault_table">
+      <table class="table-auto mt-8 mb-12 w-full" id="vault_table">
         <thead>
           <tr class="text-2xl" style="border-bottom: 3px solid red;">
             <td class="w-1/2 pb-1 pt-1 text-left">Already Found</td>

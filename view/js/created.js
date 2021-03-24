@@ -1,5 +1,5 @@
 (async function getVaultFiles() {
-    const vaultFiles = await eel.sub_vault_search_proxy()();
+    const vaultFiles = await eel.sub_vault_search()();
     if(vaultFiles == null) return;
 
     const table = document.getElementById('vault_table');
@@ -15,7 +15,7 @@
                             <td class="w-1/2 pb-3 pt-3 font-bold">${file[0]}</td>
                             <td class="w-1/4 pb-3 pt-3 text-center">${file[1]}b</td>
                             <td class="w-1/4 pb-3 pt-3 text-center">
-                            <button class="rounded-md p-2 text-xs bg-white" style="color: red">Decrypt</button>
+                            <button class="rounded-md p-2 text-xs bg-white" style="color: red" onclick="revealDecryptionPopUp('${file[0]}')">Decrypt</button>
                             </td>
                         </tr>`
     });
