@@ -47,6 +47,7 @@ const encryptVaultFolder = async () => {
         return;
     }
     await eel.encrypt_folder(folderSelected, password)();
+    getVaultFiles();
     closeEcryptFolderPopUp();
 }
 

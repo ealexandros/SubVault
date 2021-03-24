@@ -25,7 +25,7 @@ def encrypt_folder(folder_name, password):
         relative_path = path.replace(os.getcwd(), '')
         if(os.path.isfile(path)):
             with open(path, 'rb') as fil:
-                structure.append([relative_path[1:], fil.read().decode('utf-8')])
+                structure.append([relative_path[1:], base64.b64encode(fil.read()).decode('utf-8')])
     structure_json = json.dumps(structure)
     encode_structure = base64.b64encode(structure_json.encode("utf-8"))
 
@@ -59,7 +59,7 @@ def decrypt_folder(vault_name, password):
     for path, content in structure:
         check_for_sub_directory(path)
         with open(path, 'wb') as fil:
-            fil.write(str.encode(content))
+            fil.write(base64.b64decode(content))
 
     return True
 

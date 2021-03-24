@@ -1,4 +1,4 @@
-(async function getVaultFiles() {
+async function getVaultFiles() {
     const vaultFiles = await eel.sub_vault_search()();
     if(vaultFiles == null) return;
 
@@ -19,4 +19,4 @@
                             </td>
                         </tr>`
     });
-})();
+}
