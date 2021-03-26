@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script type="text/javascript" src="/eel.js"></script>
-    <script src="presenter/Created.js"></script>
-    <script src="presenter/InputListeners.js"></script>
+    <script src="presenter/home/Created.js"></script>
+    <script src="presenter/home/InputListeners.js"></script>
   </head>
   <body onload="getVaultFiles()">
     <div class="m-auto w-4/5 mt-10 pt-6">
@@ -37,6 +37,7 @@
 
       <div class="mt-5 hidden" id="encypt_folder_pass">
         <h3 class="text-2xl font-bold mb-2" id="encrypt_password_folder"></h3>
+        <div class="text-sm text-red-500 font-bold ml-1 mb-1 hidden" id="folder_logs_error">There are no logs in that folder.</div>
         <div class="text-sm text-red-500 font-bold ml-1 mb-1 hidden" id="encrypt_password_error">The password isn't correct.</div>
         <input placeholder="Password" type="password" class="text-black p-3 pl-3 rounded-lg w-1/3 outline-none" id="encrypt_password">
         <input placeholder="Verify Password" type="password" class="text-black p-3 pl-3 ml-2 rounded-lg w-1/3 outline-none" id="encrypt_password_verify">
@@ -44,23 +45,19 @@
           onclick="encryptVaultFolder()" style="background-color: red">Encrypt.</button>
         <button class="sm:ml-1 w-12 p-3 rounded-lg font-extrabold outline-none text-red-500"
           onclick="closeEcryptFolderPopUp()" style="background-color: white">X</button>
+        <div class="underline text-sm text-white text-opacity-95 hover:text-opacity-80 cursor-pointer mt-2"
+          onclick="revealFolderLogHistory()">Show vault logs</div>
       </div>
 
-      <table class="table-auto mt-8 mb-12 w-full" id="vault_table">
+      <table class="table-auto mt-8 mb-12 w-full">
         <thead>
           <tr class="text-2xl" style="border-bottom: 3px solid red;">
             <td class="w-1/2 pb-1 pt-1 text-left">Already Found</td>
             <td class="w-1/4 pb-1 pt-1 text-center">Size</td>
-            <td class="w-1/4 pb-1 pt-1 text-center">Pick</td>
+            <td class="w-1/4 pb-1 pt-1 text-center">Options</td>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="w-1/2 pb-3 pt-3 font-bold">-</td>
-            <td class="w-1/4 pb-3 pt-3 text-center">-</td>
-            <td class="w-1/4 pb-3 pt-3 text-center">-</td>
-          </tr>
-        </tbody>
+        <tbody id="vault_table_body"></tbody>
       </table>
     </div>
   </body>

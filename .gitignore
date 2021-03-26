@@ -1,8 +1,8 @@
 test/
-
-vault/*
-!vault/README.md
-
-*.vl
-
 __pycache__
+
+/example/*
+!/example/README.md
+
+/dist/
+*.vl

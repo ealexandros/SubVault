@@ -1,9 +1,11 @@
 import glob
 import os
+import subprocess
 import json
 import base64
 import random
 import eel
+from datetime import datetime
 
 import errno
 import pickle
@@ -14,6 +16,7 @@ from Crypto.Cipher import AES
 IV_SIZE = 16
 KEY_SIZE = 32
 salt = b''
+
 
 @eel.expose
 def encrypt_folder(folder_name, password):
@@ -37,7 +40,19 @@ def encrypt_folder(folder_name, password):
     with open(f"{folder_name}.vl", 'wb') as fil:
         pickle.dump(encrypted_structure, fil)
 
+
 @eel.expose
+def decrypt_folder_proxy(vault_name, password):
+    decrypt_code = decrypt_folder(vault_name, password)
+    if (not decrypt_code):
+        return False
+
+    current_date = datetime.now().strftime("%d/%m/%y;%H:%M:%S")
+    with open(f"{vault_name.replace('.vl', '')}/.vault.logs", 'a') as fil:
+        fil.write(f"{current_date}\n")
+    subprocess.check_call(["attrib", "+H", f"{vault_name.replace('.vl', '')}/.vault.logs"])
+    return True
+
 def decrypt_folder(vault_name, password):
     with open(vault_name, 'rb') as fil:
         data = pickle.load(fil)
@@ -62,6 +77,10 @@ def decrypt_folder(vault_name, password):
             fil.write(base64.b64decode(content))
 
     return True
+
+@eel.expose
+def delete_vault_file(vault_name):
+    os.remove(vault_name)
 
 def check_for_sub_directory(filename):
     if(not os.path.exists(os.path.dirname(filename))):

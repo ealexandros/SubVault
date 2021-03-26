@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/logo.svg">
+    <title>Logs</title>
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="presenter/logs/Created.js"></script>
+  </head>
+  <body onload="getLogFile()">
+    <div class="m-auto w-3/5">
+      <table class="w-full mb-10">
+        <h1 class="text-4xl text-center m-7">Times <span style="color: #41EAD4">Viseted</span>.</h1>
+        <thead>
+          <tr class="text-2xl" style="border-bottom: 3px solid red;">
+            <td class="w-1/2 pb-1 pt-1 text-left">Count</td>
+            <td class="w-1/4 pb-1 pt-1 text-center">Date</td>
+            <td class="w-1/4 pb-1 pt-1 text-center">Time</td>
+          </tr>
+        </thead>
+        <tbody id="vault_table_body"></tbody>
+      </table>
+    </div>
+  </body>
+</html>
