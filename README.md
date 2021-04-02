@@ -2,7 +2,7 @@
 
 *A GUI friendly folder encryption repository.*
 
-### Priview:
+### Preview:
 
 ![preview](https://github.com/alexandros44/SubVault/blob/main/preview.jpg)
 
