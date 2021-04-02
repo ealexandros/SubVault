@@ -42,14 +42,14 @@ More details about the above thechnologies you can find in the [Technologies](#t
 
 ## How To Use
 
-The app is pretty is to use. After you install all the necessary packages open the app as mentioned in the [Setup](#setup) section.
+The app is pretty easy to use. After you install all the necessary packages open the app as mentioned in the [Setup](#setup) section.
 So, there are three steps to start using this app,
 
 1. Give the name of the folder you want to encrypt
-2. Set a password for encryption algorithm. (A new file with the `.vl` extention should appear inside the folder you opened the app)
+2. Set a password for the encryption algorithm. (A new file with the `.vl` extention should appear inside the folder you opened the app)
 3. Select Unencrypt and type the password you just set.
 
-There is an extra option to show the log of the folder. (The date and time when it was decrypted) you can find that option in the window of decryption of the folder.
+There is an extra option to show the log of the folder. (The date and time when it was decrypted) You can find that option in the window of decryption of the folder.
 
 ## Conlusion ✨
 
