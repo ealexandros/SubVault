@@ -8,10 +8,10 @@
 
 ## Table of Content 🔍
 
-- [Setup](#setup)
+- [Setup](#setup-)
 - [About](#about)
 - [How To Use](#how-to-use)
-- [Project Conclusion](#conlusion)
+- [Project Conclusion](#conlusion-)
 
 ## Setup 🔨
 
